@@ -292,7 +292,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 817370720}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 60d17dc4abf2ff74d8980f1adbd100b2, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -594,7 +594,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1323570961}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 60d17dc4abf2ff74d8980f1adbd100b2, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -737,7 +737,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1439437193}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 60d17dc4abf2ff74d8980f1adbd100b2, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -924,7 +924,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2074362221}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 60d17dc4abf2ff74d8980f1adbd100b2, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
