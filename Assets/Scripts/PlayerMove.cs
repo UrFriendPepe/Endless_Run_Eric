@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D _rb;
     float _speed = 10f;
-    float _force = 25f;
+    float _force = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,22 +34,22 @@ public class PlayerMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.gameObject.CompareTag("BottomPlatform"))
-        //{
-        //    _rb.AddForce(Vector3.up * _force, ForceMode2D.Impulse);
-        //}
-        //else if (collision.gameObject.CompareTag("TopPlatform"))
-        //{
-        //    _rb.AddForce(Vector3.down * _force, ForceMode2D.Impulse);
-        //}
-        //else if (collision.gameObject.CompareTag("LeftPlatform"))
-        //{
-        //    _rb.AddForce(Vector3.right * _force, ForceMode2D.Impulse);
-        //    print("111111");
-        //}
-        //else if (collision.gameObject.CompareTag("RightPlatform"))
-        //{
-        //    _rb.AddForce(Vector3.left * _force, ForceMode2D.Impulse);
-        //}
+        if (collision.gameObject.CompareTag("BottomPlatform"))
+        {
+            _rb.AddForce(Vector3.up * _force, ForceMode2D.Impulse);
+        }
+        else if (collision.gameObject.CompareTag("TopPlatform"))
+        {
+            _rb.AddForce(Vector3.down * _force, ForceMode2D.Impulse);
+        }
+        else if (collision.gameObject.CompareTag("LeftPlatform"))
+        {
+            _rb.AddForce(Vector3.right * _force, ForceMode2D.Impulse);
+            print("111111");
+        }
+        else if (collision.gameObject.CompareTag("RightPlatform"))
+        {
+            _rb.AddForce(Vector3.left * _force, ForceMode2D.Impulse);
+        }
     }
 }
