@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GravitySC : MonoBehaviour
 {
+    public enum GravityState {Down,Up,Left,Right };
+    public GravityState GS;
     PlayerMove _refToPlayerSC;
     Vector3 _downGravity = new Vector3(0, -9.81f, 0);
     Vector3 _upGravity = new Vector3(0,9.81f,0);
@@ -20,36 +22,50 @@ public class GravitySC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer < 5)
+        //_timer += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.S))
         {
             Physics2D.gravity = _downGravity;
+            GS = GravityState.Down;
             _refToPlayerSC.XMovement();
         }
-        if (_timer >= 5 && _timer < 10)
+        if (Input.GetKeyDown(KeyCode.W))
         {
             Physics2D.gravity = _upGravity;
+            GS = GravityState.Up;
             _refToPlayerSC.XMovement();
         }
-        if (_timer >= 10 && _timer < 15)
+        if (Input.GetKeyDown(KeyCode.A))
         {
             Physics2D.gravity = _leftGravity;
+            GS = GravityState.Left;
             _refToPlayerSC.YMovement();
         }
-        if (_timer >= 15 && _timer < 20)
+        if (Input.GetKeyDown(KeyCode.D))
         {
             Physics2D.gravity = _rightGravity;
+            GS = GravityState.Right;
             _refToPlayerSC.YMovement();
         }
-        if (_timer >= 20)
+
+        if (GS == GravityState.Down || GS == GravityState.Up)
         {
-            _timer = 0;
+            _refToPlayerSC.XMovement();
+        }
+        else if (GS == GravityState.Left || GS == GravityState.Right)
+        {
+            _refToPlayerSC.YMovement();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // 在按下空格键时改变重力方向为向上
-            Physics2D.gravity = new Vector3(-9.81f, 0, 0);
-        }
+        //if (_timer >= 20)
+        //{
+        //    _timer = 0;
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    // 在按下空格键时改变重力方向为向上
+        //    Physics2D.gravity = new Vector3(-9.81f, 0, 0);
+        //}
     }
 }
