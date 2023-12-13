@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BallMovement : MonoBehaviour
+public class BallSC : MonoBehaviour
 {
     GravitySC _refToGravitySC;
     Rigidbody2D _rb;

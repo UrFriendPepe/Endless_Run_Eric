@@ -6,7 +6,7 @@ public class GravitySC : MonoBehaviour
 {
     public enum GravityState {Down,Up,Left,Right };
     public GravityState GS;
-    PlayerMove _refToPlayerSC;
+    PlayerMove _refToPlayerMove;
     Vector3 _downGravity = new Vector3(0, -9.81f, 0);
     Vector3 _upGravity = new Vector3(0,9.81f,0);
     Vector3 _leftGravity = new Vector3(-9.81f, 0, 0);
@@ -16,7 +16,7 @@ public class GravitySC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _refToPlayerSC = GameObject.Find("Player").GetComponent<PlayerMove>();
+        _refToPlayerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
 
     // Update is called once per frame
@@ -27,34 +27,34 @@ public class GravitySC : MonoBehaviour
         {
             Physics2D.gravity = _downGravity;
             GS = GravityState.Down;
-            _refToPlayerSC.XMovement();
+            _refToPlayerMove.XMovement();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             Physics2D.gravity = _upGravity;
             GS = GravityState.Up;
-            _refToPlayerSC.XMovement();
+            _refToPlayerMove.XMovement();
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             Physics2D.gravity = _leftGravity;
             GS = GravityState.Left;
-            _refToPlayerSC.YMovement();
+            _refToPlayerMove.YMovement();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             Physics2D.gravity = _rightGravity;
             GS = GravityState.Right;
-            _refToPlayerSC.YMovement();
+            _refToPlayerMove.YMovement();
         }
 
         if (GS == GravityState.Down || GS == GravityState.Up)
         {
-            _refToPlayerSC.XMovement();
+            _refToPlayerMove.XMovement();
         }
         else if (GS == GravityState.Left || GS == GravityState.Right)
         {
-            _refToPlayerSC.YMovement();
+            _refToPlayerMove.YMovement();
         }
 
         //if (_timer >= 20)

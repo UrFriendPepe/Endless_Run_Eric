@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     float _speed = 0.01f;
     float _force = 20f;
     GameObject _mouse;
+    public float PlayerSize;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,10 @@ public class PlayerMove : MonoBehaviour
     {
         //XMovement();
         //YMovement();
+        PlayerSize = this.transform.localScale.x;
     }
 
-    public void XMovement()
+    public void XMovement()//using in GravitySC
     {
         //float dirX = Input.GetAxis("Horizontal");
         //_rb.velocity = new Vector2(dirX * _speed, _rb.velocity.y);
@@ -38,7 +40,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void YMovement()
+    public void YMovement()//Using in GravitySC
     {
         //float dirY = Input.GetAxis("Vertical");
         //_rb.velocity = new Vector2(_rb.velocity.x, dirY * _speed);
