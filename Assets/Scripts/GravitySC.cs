@@ -27,25 +27,25 @@ public class GravitySC : MonoBehaviour
         {
             Physics2D.gravity = _downGravity;
             GS = GravityState.Down;
-            _refToPlayerMove.XMovement();
+           // _refToPlayerMove.XMovement();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             Physics2D.gravity = _upGravity;
             GS = GravityState.Up;
-            _refToPlayerMove.XMovement();
+            //_refToPlayerMove.XMovement();
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             Physics2D.gravity = _leftGravity;
             GS = GravityState.Left;
-            _refToPlayerMove.YMovement();
+            //_refToPlayerMove.YMovement();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             Physics2D.gravity = _rightGravity;
             GS = GravityState.Right;
-            _refToPlayerMove.YMovement();
+            //_refToPlayerMove.YMovement();
         }
 
         if (GS == GravityState.Down || GS == GravityState.Up)
