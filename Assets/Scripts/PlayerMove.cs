@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [SerializeField] GameObject _refToRandomBall;
     GravitySC _refToGravitySC;
     Rigidbody2D _rb;
     float _speed = 0.01f;
@@ -23,7 +24,23 @@ public class PlayerMove : MonoBehaviour
     {
         //XMovement();
         //YMovement();
-        PlayerSize = this.transform.localScale.x;
+        //PlayerSize = this.transform.localScale.x;
+        if (_refToGravitySC.GS == GravitySC.GravityState.Down)
+        {
+            XMovement();
+        }
+        if (_refToGravitySC.GS == GravitySC.GravityState.Up)
+        {
+            XMovement();
+        }
+        if (_refToGravitySC.GS == GravitySC.GravityState.Left)
+        {
+            YMovement();
+        }
+        if (_refToGravitySC.GS == GravitySC.GravityState.Right)
+        {
+            YMovement();
+        }
     }
 
     public void XMovement()//using in GravitySC
@@ -61,6 +78,10 @@ public class PlayerMove : MonoBehaviour
             if (collision.gameObject.CompareTag("BottomPlatform"))
             {
                 _rb.AddForce(Vector3.up * _force, ForceMode2D.Impulse);
+                if(this.gameObject.name == "Player")
+                {
+                    Instantiate(_refToRandomBall, new Vector3(0, 0, 0), Quaternion.identity);
+                }
             }
         }
 
@@ -69,6 +90,10 @@ public class PlayerMove : MonoBehaviour
             if (collision.gameObject.CompareTag("TopPlatform"))
             {
                 _rb.AddForce(Vector3.down * _force, ForceMode2D.Impulse);
+                if (this.gameObject.name == "Player")
+                {
+                    Instantiate(_refToRandomBall, new Vector3(0, 0, 0), Quaternion.identity);
+                }
             }
         }
 
@@ -77,7 +102,10 @@ public class PlayerMove : MonoBehaviour
             if (collision.gameObject.CompareTag("LeftPlatform"))
             {
                 _rb.AddForce(Vector3.right * _force, ForceMode2D.Impulse);
-                print("111111");
+                if (this.gameObject.name == "Player")
+                {
+                    Instantiate(_refToRandomBall, new Vector3(0, 0, 0), Quaternion.identity);
+                }
             }
         }
 
@@ -86,6 +114,10 @@ public class PlayerMove : MonoBehaviour
             if (collision.gameObject.CompareTag("RightPlatform"))
             {
                 _rb.AddForce(Vector3.left * _force, ForceMode2D.Impulse);
+                if (this.gameObject.name == "Player")
+                {
+                    Instantiate(_refToRandomBall, new Vector3(0, 0, 0), Quaternion.identity);
+                }
             }
         }
 
