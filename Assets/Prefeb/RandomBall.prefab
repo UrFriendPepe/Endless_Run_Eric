@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8182749099984718451}
   - component: {fileID: 873735096728408285}
   - component: {fileID: 5530434080663377461}
-  - component: {fileID: -3024018251661599854}
+  - component: {fileID: -3567581280398333454}
   m_Layer: 0
   m_Name: RandomBall
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-3024018251661599854
+--- !u!114 &-3567581280398333454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5019408181857091934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b5d5c57e2c8df4ab954f46a524d988, type: 3}
+  m_Script: {fileID: 11500000, guid: 4097272ec688f2a4d9269e385f502c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _refToRandomBall: {fileID: 5019408181857091934}
+  PlayerSize: 0
+  _timer: 0

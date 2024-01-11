@@ -508,6 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _refToRandomBall: {fileID: 5019408181857091934, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
   PlayerSize: 0
+  _timer: 0
 --- !u!61 &1192445100
 BoxCollider2D:
   m_ObjectHideFlags: 0
