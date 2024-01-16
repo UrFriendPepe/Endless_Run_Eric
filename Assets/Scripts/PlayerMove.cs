@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
     GameObject _mouse;
     public float PlayerSize;
     public float _timer;
+    float _dist;
+    float _offset = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,13 +51,16 @@ public class PlayerMove : MonoBehaviour
     {
         //float dirX = Input.GetAxis("Horizontal");
         //_rb.velocity = new Vector2(dirX * _speed, _rb.velocity.y);
+        _dist = Vector2.Distance(_mouse.transform.position, transform.position);
         if (_mouse.transform.position.x > this.transform.position.x)
         {
-            transform.position += new Vector3(_speed, 0, 0);
+            //transform.position += new Vector3(_speed, 0, 0);
+            _rb.AddForce(Vector2.right * _offset * _dist);
         }
         else if (_mouse.transform.position.x < this.transform.position.x)
         {
-            transform.position -= new Vector3(_speed, 0, 0);
+            //transform.position -= new Vector3(_speed, 0, 0);
+            _rb.AddForce(Vector2.right * -_offset * _dist);
         }
     }
 
@@ -63,13 +68,16 @@ public class PlayerMove : MonoBehaviour
     {
         //float dirY = Input.GetAxis("Vertical");
         //_rb.velocity = new Vector2(_rb.velocity.x, dirY * _speed);
+        _dist = Vector2.Distance(_mouse.transform.position, transform.position);
         if (_mouse.transform.position.y > this.transform.position.y)
         {
-            transform.position += new Vector3(0, _speed, 0);
+            //transform.position += new Vector3(0, _speed, 0);
+            _rb.AddForce(Vector2.up * _offset * _dist);
         }
         else if (_mouse.transform.position.y < this.transform.position.y)
         {
-            transform.position -= new Vector3(0, _speed, 0);
+            //transform.position -= new Vector3(0, _speed, 0);
+            _rb.AddForce(Vector2.up * -_offset * _dist);
         }
     }
 
@@ -134,5 +142,12 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Vector2 jumpVec = transform.position - collision.transform.position;
+            float jumpForce = 250;
+            _rb.AddForce(jumpVec * jumpForce);
+            collision.transform.GetComponent<Rigidbody2D>().AddForce(-jumpVec * jumpForce);
+        }
     }
 }
