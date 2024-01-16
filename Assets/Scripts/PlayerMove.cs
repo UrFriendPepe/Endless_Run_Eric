@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     GravitySC _refToGravitySC;
     Rigidbody2D _rb;
     float _speed = 0.01f;
-    float _force = 20f;
+    float _force = 40f;
     GameObject _mouse;
     public float PlayerSize;
     public float _timer;
@@ -87,7 +87,7 @@ public class PlayerMove : MonoBehaviour
         if (_timer >= 5)
         {
             _timer = 0;
-            Instantiate(_refToRandomBall, new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             print("111111");
         }
     }
