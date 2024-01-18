@@ -39,7 +39,7 @@ public class MovingPlatforms : MonoBehaviour
                 _timer += Time.deltaTime;
                 if (_timer > 0)
                 {
-                    _refToTopP.transform.position -= new Vector3(0, 0.05f, 0);
+                    _refToTopP.transform.position -= new Vector3(0, 1, 0);
                     print("333");
                     if (_timer >= 4)
                     {

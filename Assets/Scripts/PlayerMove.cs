@@ -149,13 +149,15 @@ public class PlayerMove : MonoBehaviour
             _rb.AddForce(jumpVec * jumpForce);
             collision.transform.GetComponent<Rigidbody2D>().AddForce(-jumpVec * jumpForce);
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+
         if (collision.gameObject.CompareTag("MovingP"))
         {
             //gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
     }
 }
