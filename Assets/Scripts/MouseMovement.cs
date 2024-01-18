@@ -9,6 +9,7 @@ public class MouseMovement : MonoBehaviour
     void Start()
     {
         _mouse = GameObject.Find("Mouse");
+
     }
 
     // Update is called once per frame

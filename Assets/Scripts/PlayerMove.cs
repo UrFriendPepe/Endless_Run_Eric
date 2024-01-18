@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     public float PlayerSize;
     public float _timer;
     float _dist;
-    float _offset = 0.1f;
+    float _offset = 0.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,7 +94,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(_refToGravitySC.GS == GravitySC.GravityState.Down)
+        if (_refToGravitySC.GS == GravitySC.GravityState.Down)
         {
             if (collision.gameObject.CompareTag("BottomPlatform"))
             {
@@ -148,6 +148,14 @@ public class PlayerMove : MonoBehaviour
             float jumpForce = 250;
             _rb.AddForce(jumpVec * jumpForce);
             collision.transform.GetComponent<Rigidbody2D>().AddForce(-jumpVec * jumpForce);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("MovingP"))
+        {
+            //gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
     }
 }

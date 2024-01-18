@@ -9,6 +9,7 @@ TagManager:
   - TopPlatform
   - LeftPlatform
   - RightPlatform
+  - MovingP
   layers:
   - Default
   - TransparentFX

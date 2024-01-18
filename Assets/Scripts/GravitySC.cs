@@ -48,14 +48,14 @@ public class GravitySC : MonoBehaviour
             //_refToPlayerMove.YMovement();
         }
 
-        if (GS == GravityState.Down || GS == GravityState.Up)
-        {
-            _refToPlayerMove.XMovement();
-        }
-        else if (GS == GravityState.Left || GS == GravityState.Right)
-        {
-            _refToPlayerMove.YMovement();
-        }
+        //if (GS == GravityState.Down || GS == GravityState.Up)
+        //{
+        //    _refToPlayerMove.XMovement();
+        //}
+        //else if (GS == GravityState.Left || GS == GravityState.Right)
+        //{
+        //    _refToPlayerMove.YMovement();
+        //}
 
         //if (_timer >= 20)
         //{
