@@ -84,11 +84,10 @@ public class PlayerMove : MonoBehaviour
     public void MoreBalls()
     {
         _timer += Time.deltaTime;
-        if (_timer >= 5)
+        if (_timer >= 8)//how long to generate balls
         {
             _timer = 0;
             Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
-            print("111111");
         }
     }
 
@@ -150,14 +149,14 @@ public class PlayerMove : MonoBehaviour
             collision.transform.GetComponent<Rigidbody2D>().AddForce(-jumpVec * jumpForce);
         }
 
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.CompareTag("MovingP"))
         {
             //gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
     }
 }
