@@ -16,7 +16,7 @@ public class BottomPlatform : MonoBehaviour
     {
         _timer += Time.deltaTime;
         transform.position += new Vector3(0, 0.02f, 0);
-        if (_timer >= 15)
+        if (_timer >= 30)
         {
             Destroy(this.gameObject);
             _timer = 0;

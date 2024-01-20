@@ -6,20 +6,29 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] GameObject _refToRandomBall;
     GravitySC _refToGravitySC;
+    GameManager _refToGameManager;
     Rigidbody2D _rb;
     float _speed = 0.01f;
     float _force = 40f;
     GameObject _mouse;
+    GameObject _playerGroup;
     public float PlayerSize;
     public float _timer;
     float _dist;
     float _offset = 0.05f;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _mouse = GameObject.Find("Mouse");
         _refToGravitySC = GameObject.Find("GameManager").GetComponent<GravitySC>();
+        _playerGroup = GameObject.Find("PlayerGroup");
+        _refToGameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        this.gameObject.transform.SetParent(_playerGroup.transform);
+    }
+    void Start()
+    {
+        _refToGameManager.ChildCount.Insert(0, this.gameObject);
     }
 
     // Update is called once per frame
@@ -84,10 +93,14 @@ public class PlayerMove : MonoBehaviour
     public void MoreBalls()
     {
         _timer += Time.deltaTime;
-        if (_timer >= 8)//how long to generate balls
+        if (_timer >= 1)//how long to generate balls
         {
             _timer = 0;
-            Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
+            int spermLimit = 10;
+            if(_refToGameManager.SpermCount <= spermLimit)
+            {
+                Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
+            }
         }
     }
 
@@ -158,5 +171,9 @@ public class PlayerMove : MonoBehaviour
             //gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
+    }
+    private void OnDestroy()
+    {
+        _refToGameManager.ChildCount.Remove(gameObject);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingPlatforms : MonoBehaviour
 {
-    [SerializeField] GameObject _refToTopP;
+    [SerializeField] GameObject _topSmallP, _bottomSmallP;
     public int _pattern,_randomX;
     Vector3 _loca1,_loca2,_loca3,_loca4;
     public float _timer,_numTimer;
@@ -24,21 +24,22 @@ public class MovingPlatforms : MonoBehaviour
         _numTimer += Time.deltaTime;
         if(_pattern == 0)
         {
-            if (_numTimer >= 5)
+            if (_numTimer >= 8)//time for changing to different patterns
             {
-                _randomX = Random.Range(-53, 54);
-                _pattern = Random.Range(1, 2);
+                _randomX = Random.Range(-53, 54);//for top and bottom platforms' x axis
+                _pattern = Random.Range(1, 3);//how many pattern do I want?
                 _numTimer = 0;
             }
         }
 
-        _loca1 = new Vector3(_randomX, 43, 0);
+        _loca1 = new Vector3(_randomX, 43, 0);//for the top platforms
+        _loca2 = new Vector3(_randomX, -43, 0);//for the bottom platforms
         switch (_pattern)
         {
             case 1:
                 if (_timer <= 0)
                 {
-                    Instantiate(_refToTopP, _loca1, Quaternion.identity);
+                    Instantiate(_topSmallP, _loca1, Quaternion.identity);
                 }
                 _timer += Time.deltaTime;
                 if (_timer >= 4)
@@ -50,7 +51,7 @@ public class MovingPlatforms : MonoBehaviour
             case 2:
                 if (_timer <= 0)
                 {
-                    Instantiate(_refToTopP, _loca1, Quaternion.identity);
+                    Instantiate(_bottomSmallP, _loca2, Quaternion.identity);
                 }
                 _timer += Time.deltaTime;
                 if (_timer >= 4)
