@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
     }
     void Start()
     {
-        _refToGameManager.ChildCount.Insert(0, this.gameObject);
+        //_refToGameManager.ChildCount.Insert(0, this.gameObject);
     }
 
     // Update is called once per frame
@@ -93,11 +93,15 @@ public class PlayerMove : MonoBehaviour
     public void MoreBalls()
     {
         _timer += Time.deltaTime;
-        if (_timer >= 1)//how long to generate balls
+        if (_timer >= 2)//how long to generate balls
         {
             _timer = 0;
-            int spermLimit = 10;
-            if(_refToGameManager.SpermCount <= spermLimit)
+            //int spermLimit = 10;
+            //if(_refToGameManager.SpermCount <= spermLimit)
+            //{
+            //    Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
+            //}
+            if(_refToGameManager.PlayerNum <= 16)
             {
                 Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             }
@@ -174,6 +178,6 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnDestroy()
     {
-        _refToGameManager.ChildCount.Remove(gameObject);
+        //_refToGameManager.ChildCount.Remove(gameObject);
     }
 }

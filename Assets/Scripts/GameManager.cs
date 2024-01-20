@@ -10,13 +10,13 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
-    [SerializeField] int _playerNum;
+    
     GameObject _playerGroup;
     // Start is called before the first frame update
 
 
 
-    public List<GameObject> ChildCount = new List<GameObject>();
+    //public List<GameObject> ChildCount = new List<GameObject>();
     private void Awake()
     {
         _playerGroup = GameObject.Find("PlayerGroup");
@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public int SpermCount = 6;
+    public int PlayerNum;
+    //public int PlayerCount = 6;
     void Update()
     {
         //for (int i = 0; i < ChildCount.Count; i++)
@@ -39,6 +40,14 @@ public class GameManager : MonoBehaviour
                 
         //    }
         //}
-       SpermCount =  ChildCount.Count;
+       //SpermCount =  ChildCount.Count;
+        PlayerNum = _playerGroup.transform.childCount;
+        for(int i = 0; i < PlayerNum; i++)
+        {
+            if(i >= 5)
+            {
+                Destroy(_playerGroup.transform.GetChild(i).gameObject);
+            }
+        }
     }
 }
