@@ -101,7 +101,7 @@ public class PlayerMove : MonoBehaviour
             //{
             //    Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             //}
-            if(_refToGameManager.PlayerNum <= 5)
+            if(_refToGameManager.PlayerNum <= 20)
             {
                 Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             }

@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         PlayerNum = _playerGroup.transform.childCount;
         for(int i = 0; i < PlayerNum; i++)
         {
-            if(i >= 5)
+            if(i >= 20)
             {
                 Destroy(_playerGroup.transform.GetChild(i).gameObject);
             }
