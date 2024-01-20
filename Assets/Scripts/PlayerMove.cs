@@ -93,7 +93,7 @@ public class PlayerMove : MonoBehaviour
     public void MoreBalls()
     {
         _timer += Time.deltaTime;
-        if (_timer >= 2)//how long to generate balls
+        if (_timer >= 5)//how long to generate balls
         {
             _timer = 0;
             //int spermLimit = 10;
