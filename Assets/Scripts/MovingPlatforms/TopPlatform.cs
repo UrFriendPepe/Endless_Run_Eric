@@ -20,7 +20,7 @@ public class TopPlatform : MonoBehaviour
     {
         _timer += Time.deltaTime;
         transform.position += new Vector3(0, -_speed, 0);
-        if (_timer >= 30)
+        if (_timer >= 60)
         {
             Destroy(this.gameObject);
             _timer = 0;
