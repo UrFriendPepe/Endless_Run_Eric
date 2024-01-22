@@ -6,16 +6,17 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] GameObject _refToRandomBall;
     GravitySC _refToGravitySC;
-    GameManager _refToGameManager;
     Rigidbody2D _rb;
     float _speed = 0.01f;
     float _force = 40f;
     GameObject _mouse;
     GameObject _playerGroup;
     public float PlayerSize;
-    public float _timer;
+    public float _timer,_generatingTime;
     float _dist;
     float _offset = 0.05f;
+    int _playerNum = GameManager.Instance.PlayerNum;
+    int _maxPlayer = GameManager.Instance.MaxPlayer;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -23,12 +24,13 @@ public class PlayerMove : MonoBehaviour
         _mouse = GameObject.Find("Mouse");
         _refToGravitySC = GameObject.Find("GameManager").GetComponent<GravitySC>();
         _playerGroup = GameObject.Find("PlayerGroup");
-        _refToGameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         this.gameObject.transform.SetParent(_playerGroup.transform);
     }
     void Start()
     {
         //_refToGameManager.ChildCount.Insert(0, this.gameObject);
+        _generatingTime = 8;
+
     }
 
     // Update is called once per frame
@@ -93,7 +95,7 @@ public class PlayerMove : MonoBehaviour
     public void MoreBalls()
     {
         _timer += Time.deltaTime;
-        if (_timer >= 5)//how long to generate balls
+        if (_timer >= _generatingTime)//how long to generate balls
         {
             _timer = 0;
             //int spermLimit = 10;
@@ -101,7 +103,7 @@ public class PlayerMove : MonoBehaviour
             //{
             //    Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             //}
-            if(_refToGameManager.PlayerNum <= 20)
+            if(_playerNum <= _maxPlayer)
             {
                 Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             }

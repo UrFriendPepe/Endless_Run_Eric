@@ -5,7 +5,11 @@ using UnityEngine;
 public class TopPlatform : MonoBehaviour
 {
     float _timer;
+    float _speed = MovingPlatforms.Instance._speed;
     // Start is called before the first frame update
+    private void Awake()
+    {
+    }
     void Start()
     {
         
@@ -15,7 +19,7 @@ public class TopPlatform : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        transform.position -= new Vector3(0, 0.02f, 0);
+        transform.position += new Vector3(0, -_speed, 0);
         if (_timer >= 30)
         {
             Destroy(this.gameObject);

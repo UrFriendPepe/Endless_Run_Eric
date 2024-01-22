@@ -1023,6 +1023,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1917545373689844157, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
+      propertyPath: m_Intensity
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 5019408181857091934, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1070,22 +1074,6 @@ PrefabInstance:
     - target: {fileID: 5038767191953668931, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5584931265616502607, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.a
-      value: 0.29411766
-      objectReference: {fileID: 0}
-    - target: {fileID: 8182749099984718451, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
-      propertyPath: m_Color.b
-      value: 0.47843137
-      objectReference: {fileID: 0}
-    - target: {fileID: 8182749099984718451, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
-      propertyPath: m_Color.g
-      value: 0.69411767
-      objectReference: {fileID: 0}
-    - target: {fileID: 8182749099984718451, guid: 8f8a6f04116d4ec41957aed2e9eac69c, type: 3}
-      propertyPath: m_Color.r
-      value: 0.9647059
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1382,10 +1370,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topSmallP: {fileID: 9178321433010541317, guid: e309d0dc111c1e9418016f53648923b7, type: 3}
   _bottomSmallP: {fileID: 9118682895567774545, guid: c78b67dc71a21c749bb31e7226ec1a4f, type: 3}
+  _leftSmallP: {fileID: 9178321433010541317, guid: 9134a409e26d30b449ac0016b46534e7, type: 3}
+  _rightSmallP: {fileID: 9178321433010541317, guid: a0b8ad50d860b2c4cad385a566b851f8, type: 3}
   _pattern: 0
   _randomX: 0
+  _randomY: 0
   _timer: 0
   _numTimer: 0
+  _speedUpTimer: 0
+  _speed: 0
 --- !u!114 &1953162102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,6 +1392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNum: 0
+  MaxPlayer: 0
 --- !u!82 &1953162103
 AudioSource:
   m_ObjectHideFlags: 0

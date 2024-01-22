@@ -12,10 +12,13 @@ public class GameManager : MonoBehaviour
 
     
     GameObject _playerGroup;
-    // Start is called before the first frame update
+    public int PlayerNum, MaxPlayer;
 
 
-
+    private GameManager()
+    {
+        instance = this;
+    }
     //public List<GameObject> ChildCount = new List<GameObject>();
     private void Awake()
     {
@@ -24,11 +27,11 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        MaxPlayer = 15;
     }
 
     // Update is called once per frame
-    public int PlayerNum;
+
     //public int PlayerCount = 6;
     void Update()
     {
@@ -44,7 +47,7 @@ public class GameManager : MonoBehaviour
         PlayerNum = _playerGroup.transform.childCount;
         for(int i = 0; i < PlayerNum; i++)
         {
-            if(i >= 20)
+            if(i >= MaxPlayer)
             {
                 Destroy(_playerGroup.transform.GetChild(i).gameObject);
             }
