@@ -19,6 +19,7 @@ public class MouseMovement : MonoBehaviour
     }
     void MouseMove()
     {
+        Cursor.visible = false;
         this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition)+new Vector3(0,0,10);
     }
 }

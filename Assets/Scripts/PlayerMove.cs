@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] GameObject _refToRandomBall;
+    [SerializeField] GameObject _refToPlayer;
     GravitySC _refToGravitySC;
+    GameManager _gameManager;
     Rigidbody2D _rb;
-    float _speed = 0.01f;
     float _force = 40f;
     GameObject _mouse;
     GameObject _playerGroup;
     public float PlayerSize;
     public float _timer,_generatingTime;
     float _dist;
-    float _offset = 0.05f;
-    int _playerNum = GameManager.Instance.PlayerNum;
-    int _maxPlayer = GameManager.Instance.MaxPlayer;
+    float _offset = 0.05f;//player speed
+
     // Start is called before the first frame update
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _mouse = GameObject.Find("Mouse");
-        _refToGravitySC = GameObject.Find("GameManager").GetComponent<GravitySC>();
+        _refToGravitySC = GameObject.Find("PlatformGroup").GetComponent<GravitySC>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _playerGroup = GameObject.Find("PlayerGroup");
         this.gameObject.transform.SetParent(_playerGroup.transform);
     }
     void Start()
     {
         //_refToGameManager.ChildCount.Insert(0, this.gameObject);
-        _generatingTime = 8;
+        _generatingTime = 5;
+
+
 
     }
 
@@ -39,23 +41,27 @@ public class PlayerMove : MonoBehaviour
         //XMovement();
         //YMovement();
         //PlayerSize = this.transform.localScale.x;
-        if (_refToGravitySC.GS == GravitySC.GravityState.Down)
+        if (_gameManager.State == GameManager.GameState.GameStart)
         {
-            XMovement();
+            if (_refToGravitySC.GS == GravitySC.GravityState.Down)
+            {
+                XMovement();
+            }
+            if (_refToGravitySC.GS == GravitySC.GravityState.Up)
+            {
+                XMovement();
+            }
+            if (_refToGravitySC.GS == GravitySC.GravityState.Left)
+            {
+                YMovement();
+            }
+            if (_refToGravitySC.GS == GravitySC.GravityState.Right)
+            {
+                YMovement();
+            }
+            MoreBalls();
         }
-        if (_refToGravitySC.GS == GravitySC.GravityState.Up)
-        {
-            XMovement();
-        }
-        if (_refToGravitySC.GS == GravitySC.GravityState.Left)
-        {
-            YMovement();
-        }
-        if (_refToGravitySC.GS == GravitySC.GravityState.Right)
-        {
-            YMovement();
-        }
-        MoreBalls();
+
     }
 
     public void XMovement()//using in GravitySC
@@ -94,6 +100,16 @@ public class PlayerMove : MonoBehaviour
 
     public void MoreBalls()
     {
+        int playerNum = GameManager.Instance.PlayerNum;
+        int maxPlayer = GameManager.Instance.MaxPlayer;
+
+        float growthfunction = (0.75f + 0.05f * Mathf.Pow((playerNum - 1), 1.35f));
+        _generatingTime = growthfunction * Random.Range(6f, 10f);
+        //if (playerNum<=3 && _generatingTime > 12)
+        //{
+        //    _generatingTime = 8;
+        //}
+
         _timer += Time.deltaTime;
         if (_timer >= _generatingTime)//how long to generate balls
         {
@@ -103,9 +119,9 @@ public class PlayerMove : MonoBehaviour
             //{
             //    Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             //}
-            if(_playerNum <= _maxPlayer)
+            if (playerNum <= maxPlayer)
             {
-                Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
+                Instantiate(_refToPlayer, this.transform.position, Quaternion.identity);
             }
         }
     }

@@ -16,11 +16,16 @@ public class MovingPlatforms : MonoBehaviour
     Vector3 _loca1,_loca2,_loca3,_loca4;
     public float _timer,_numTimer,_speedUpTimer;
     public float _speed;
+    GameManager _gameManager;
     // Start is called before the first frame update
 
     private MovingPlatforms()
     {
         instance = this;
+    }
+    private void Awake()
+    {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     void Start()
     {
@@ -32,8 +37,14 @@ public class MovingPlatforms : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovingP();
-        SpeedUp();
+
+        if (_gameManager.State == GameManager.GameState.GameStart)
+        {
+            MovingP();
+            SpeedUp();
+        }
+
+
     }
     void MovingP()
     {
@@ -122,6 +133,14 @@ public class MovingPlatforms : MonoBehaviour
         if (_speedUpTimer >= 120)
         {
             _speed = 0.08f;
+        }
+        if( _speedUpTimer >= 140)
+        {
+            _speed = 0.1f;
+        }
+        if (_speedUpTimer >= 160)
+        {
+            _speed = 0.12f;
         }
     }
 

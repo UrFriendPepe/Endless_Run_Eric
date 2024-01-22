@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4097272ec688f2a4d9269e385f502c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _refToRandomBall: {fileID: 5019408181857091934}
+  _refToPlayer: {fileID: 5019408181857091934}
   PlayerSize: 0
   _timer: 0
   _generatingTime: 0
