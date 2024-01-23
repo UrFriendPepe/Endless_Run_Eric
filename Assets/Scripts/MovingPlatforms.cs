@@ -12,10 +12,11 @@ public class MovingPlatforms : MonoBehaviour
 
     [SerializeField] GameObject _topSmallP, _bottomSmallP, _leftSmallP, _rightSmallP;
     public int _pattern,_randomX,_randomY;
-    int _patternChangingTime,_platformGeneratingTime;
+    int _patternChangingTime;
     Vector3 _loca1,_loca2,_loca3,_loca4;
     public float _timer,_numTimer,_speedUpTimer;
-    public float _speed;
+    public float _speed,_generatingTimer;
+    public float PlatformDestoryTime;
     GameManager _gameManager;
     // Start is called before the first frame update
 
@@ -30,8 +31,9 @@ public class MovingPlatforms : MonoBehaviour
     void Start()
     {
         _speed = 0.02f;
-        _platformGeneratingTime = 5;//how long to generate platforms
-        _patternChangingTime = 5;//how long to change patterns after generated platform
+        _generatingTimer = 5;//how long to generate platforms
+        PlatformDestoryTime = 120;
+        _patternChangingTime = 1;//how long to change patterns after generated platform
     }
 
     // Update is called once per frame
@@ -51,19 +53,19 @@ public class MovingPlatforms : MonoBehaviour
         _numTimer += Time.deltaTime;
         if(_pattern == 0)
         {
-            if (_numTimer >= _platformGeneratingTime)
+            if (_numTimer >= _generatingTimer)
             {
-                _randomX = Random.Range(-53, 54);//for top and bottom platforms' x axis
-                _randomY = Random.Range(-25, 25);//for left and right platforms' y axis
+                _randomX = Random.Range(-110, 111);//for top and bottom platforms' x axis
+                _randomY = Random.Range(-85, 86);//for left and right platforms' y axis
                 _pattern = Random.Range(1, 5);//how many pattern do I want?
                 _numTimer = 0;
             }
         }
 
-        _loca1 = new Vector3(_randomX, 43, 0);//for the top platforms
-        _loca2 = new Vector3(_randomX, -43, 0);//for the bottom platforms
-        _loca3 = new Vector3(-74, _randomY, 0);//for the left platforms
-        _loca4 = new Vector3(74, _randomY, 0);//for the right platforms
+        _loca1 = new Vector3(_randomX, 103, 0);//for the top platforms
+        _loca2 = new Vector3(_randomX, -103, 0);//for the bottom platforms
+        _loca3 = new Vector3(-128, _randomY, 0);//for the left platforms
+        _loca4 = new Vector3(128, _randomY, 0);//for the right platforms
         switch (_pattern)
         {
             case 1:

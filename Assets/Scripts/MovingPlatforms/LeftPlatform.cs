@@ -6,6 +6,7 @@ public class LeftPlatform : MonoBehaviour
 {
     float _timer;
     float _speed = MovingPlatforms.Instance._speed;
+    float _platformDestoryTime = MovingPlatforms.Instance.PlatformDestoryTime;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class LeftPlatform : MonoBehaviour
     {
         _timer += Time.deltaTime;
         transform.position += new Vector3(_speed, 0, 0);
-        if (_timer >= 60)
+        if (_timer >= _platformDestoryTime)
         {
             Destroy(this.gameObject);
             _timer = 0;

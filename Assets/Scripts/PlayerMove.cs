@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject _refToPlayer;
     GravitySC _refToGravitySC;
     GameManager _gameManager;
+    GameObject _temp;
     Rigidbody2D _rb;
     float _force = 40f;
     GameObject _mouse;
@@ -23,16 +24,15 @@ public class PlayerMove : MonoBehaviour
         _mouse = GameObject.Find("Mouse");
         _refToGravitySC = GameObject.Find("PlatformGroup").GetComponent<GravitySC>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        _playerGroup = GameObject.Find("PlayerGroup");
-        this.gameObject.transform.SetParent(_playerGroup.transform);
+        //_playerGroup = GameObject.Find("PlayerGroup");
+        //this.gameObject.transform.SetParent(_playerGroup.transform);
     }
     void Start()
     {
         //_refToGameManager.ChildCount.Insert(0, this.gameObject);
         _generatingTime = 5;
 
-
-
+        
     }
 
     // Update is called once per frame
@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour
 
     public void MoreBalls()
     {
-        int playerNum = GameManager.Instance.PlayerNum;
+        int playerNum = GameManager.Instance.ChildCount.Count;
         int maxPlayer = GameManager.Instance.MaxPlayer;
 
         float growthfunction = (0.75f + 0.05f * Mathf.Pow((playerNum - 1), 1.35f));
@@ -119,9 +119,12 @@ public class PlayerMove : MonoBehaviour
             //{
             //    Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             //}
-            if (playerNum <= maxPlayer)
+            if (playerNum < maxPlayer)
             {
-                Instantiate(_refToPlayer, this.transform.position, Quaternion.identity);
+                _temp = Instantiate(_refToPlayer, this.transform.position, Quaternion.identity);
+                _gameManager.ChildCount.Add(_temp);//add players to the list
+
+                //add to list
             }
         }
     }
@@ -191,6 +194,8 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag("MovingP"))
         {
             //gameObject.SetActive(false);
+            //remove 1 from list
+            //_gameManager.ChildCount.Remove(gameObject);
             Destroy(this.gameObject);
         }
     }

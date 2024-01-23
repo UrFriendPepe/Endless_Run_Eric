@@ -17,7 +17,7 @@ public class GravitySC : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        _refToPlayerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
+        //_refToPlayerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     void Start()
