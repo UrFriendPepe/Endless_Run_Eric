@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         //_refToGameManager.ChildCount.Insert(0, this.gameObject);
-        _generatingTime = 5;
+        _generatingTime = 6;
 
 
 

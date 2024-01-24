@@ -29,7 +29,7 @@ public class MovingPlatforms : MonoBehaviour
     }
     void Start()
     {
-        _speed = 0.02f;
+        _speed = 0.1f;
         _platformGeneratingTime = 5;//how long to generate platforms
         _patternChangingTime = 5;//how long to change patterns after generated platform
     }
@@ -124,23 +124,23 @@ public class MovingPlatforms : MonoBehaviour
         _speedUpTimer += Time.deltaTime;
         if (_speedUpTimer >= 40)
         {
-            _speed = 0.04f;
+            _speed = 0.2f;
         }
         if (_speedUpTimer >= 80)
         {
-            _speed = 0.06f;
+            _speed = 0.4f;
         }
         if (_speedUpTimer >= 120)
         {
-            _speed = 0.08f;
+            _speed = 0.6f;
         }
         if( _speedUpTimer >= 140)
         {
-            _speed = 0.1f;
+            _speed = 0.8f;
         }
         if (_speedUpTimer >= 160)
         {
-            _speed = 0.12f;
+            _speed = 1.2f;
         }
     }
 

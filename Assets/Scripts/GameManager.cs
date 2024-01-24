@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     float _scoreTimer, _scores;
     TextMeshPro _scoreText, _gameText;
     Vector3 _uiHidesPos, _uiShowsPos;
+    public int myFrameRate = 60;
+
 
 
 
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        Application.targetFrameRate = myFrameRate;
+        QualitySettings.vSyncCount = 0;
         MaxPlayer = 15;
         _scoreTimer = 0;
         _scores = 0;

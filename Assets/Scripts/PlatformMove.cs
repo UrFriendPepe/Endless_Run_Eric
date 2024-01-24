@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlatformMove : MonoBehaviour
@@ -10,6 +9,7 @@ public class PlatformMove : MonoBehaviour
     float _dir;
     float _timer;
     bool _moving;
+
     // Start is called before the first frame update
     void Start()
     {
