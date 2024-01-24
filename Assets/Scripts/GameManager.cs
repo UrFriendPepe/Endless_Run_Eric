@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public Vector3 CamXY;
 
     public List<GameObject> ChildCount = new List<GameObject>();
+
+    public bool Reused;
     private void Awake()
     {
         instance = this;
@@ -43,9 +45,10 @@ public class GameManager : MonoBehaviour
         _scoreText = GameObject.Find("Scores").GetComponent<TextMeshPro>();
         _gameText = GameObject.Find("GameText").GetComponent<TextMeshPro>();
         CamPos = GameObject.Find("Main Camera").GetComponent<Transform>();
-        _temp = Instantiate(_refToPlayer, this.transform.position, Quaternion.identity);
-        ChildCount.Add(_temp);
+        _refToPlayer = GameObject.Find("Player");
+        ChildCount.Add(_refToPlayer);
 
+        PlayerNum = 1;
         //if (instance == null)
         //{
         //    instance = this;
@@ -127,7 +130,7 @@ public class GameManager : MonoBehaviour
             _gameText.transform.position = _uiHidesPos;
             //PlayerNumber();
             ScoreSystem();
-            if(ChildCount.Count == 0)
+            if(PlayerNum == 0)
             {
                 State = GameState.GameEnd;
             }
@@ -166,38 +169,42 @@ public class GameManager : MonoBehaviour
 
     void PlayerNumAndCam()
     {
-        for (int i = 0; i < ChildCount.Count; i++)
+        //for (int i = 0; i < ChildCount.Count; i++)
+        //{
+        //    if (ChildCount[i] == null)
+        //    {
+        //        //Destroy(ChildCount[i].gameObject);
+        //        ChildCount.RemoveAt(i);
+        //    }
+        //}
+
+        Reused = false;
+        if (PlayerNum == 0) return;
+        ChildSumPos = ChildSumPos / PlayerNum;
+        CamXY = new Vector3(CamPos.localPosition.x, CamPos.localPosition.y, -10);
+        CamPos.position = Vector3.Lerp(CamXY, ChildSumPos, 1.5f * Time.deltaTime);
+        PlayerNum = 0;
+        ChildSumPos = Vector3.zero;
+        foreach (GameObject pos in ChildCount)
         {
-            if (ChildCount[i] == null)
+            if (pos == null) return;
+            if(pos.activeInHierarchy == true)
             {
-                //Destroy(ChildCount[i].gameObject);
-                ChildCount.RemoveAt(i);
+                PlayerNum++;
+                ChildSumPos += pos.transform.position;
             }
         }
 
-        if(ChildCount.Count == 0) return;
 
-        ChildSumPos = Vector3.zero;
 
-        foreach(GameObject pos in ChildCount)
-        {
-            if (pos == null) return;
-
-            ChildSumPos += pos.transform.position;
-        }
-
-        ChildSumPos = ChildSumPos / ChildCount.Count;
-        CamXY = new Vector3(CamPos.localPosition.x, CamPos.localPosition.y, -10);
-        CamPos.position = Vector3.Lerp(CamXY, ChildSumPos, 3.5f * Time.deltaTime);
-
-        if (ChildCount.Count > 6)
-        {
-            Camera.main.orthographicSize = 40 + ChildCount.Count * 2;
-        }
-        else
-        {
-            Camera.main.orthographicSize = 40;
-        }
+        //if (PlayerNum > 6)
+        //{
+        //    Camera.main.orthographicSize = 40 + PlayerNum * 2;
+        //}
+        //else
+        //{
+        //    Camera.main.orthographicSize = 40;
+        //}
         //use current cam size
     }
 
@@ -205,9 +212,9 @@ public class GameManager : MonoBehaviour
     {
         // _scoreTimer += Time.deltaTime;
 
-        if(ChildCount.Count != 0)
+        if(PlayerNum != 0)
         {
-            float scoremultiplier = (1 + 0.1354f * Mathf.Pow((ChildCount.Count - 1), 1.55f));
+            float scoremultiplier = (1 + 0.1354f * Mathf.Pow((PlayerNum - 1), 1.55f));
             _scores += scoremultiplier * 10f * Time.deltaTime;
             _scoreText.text = "Score : " + _scores.ToString("F0") + " (X" + scoremultiplier.ToString("F1") + ")";
         }

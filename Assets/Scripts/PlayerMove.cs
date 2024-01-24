@@ -15,8 +15,9 @@ public class PlayerMove : MonoBehaviour
     public float PlayerSize;
     public float _timer,_generatingTime;
     float _dist;
-    float _offset = 0.05f;//player speed
-
+    float _offset = 0.1f;//player speed
+    bool _decreasingNum;
+    SpriteRenderer _spriteRenderer;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -24,15 +25,21 @@ public class PlayerMove : MonoBehaviour
         _mouse = GameObject.Find("Mouse");
         _refToGravitySC = GameObject.Find("PlatformGroup").GetComponent<GravitySC>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         //_playerGroup = GameObject.Find("PlayerGroup");
         //this.gameObject.transform.SetParent(_playerGroup.transform);
     }
     void Start()
     {
+
+        //_decreasingNum = true;
+        //_gameManager.PlayerNum++;
         //_refToGameManager.ChildCount.Insert(0, this.gameObject);
         _generatingTime = 5;
+        //_gameManager.PlayerNum
 
-        
+
+
     }
 
     // Update is called once per frame
@@ -100,9 +107,10 @@ public class PlayerMove : MonoBehaviour
 
     public void MoreBalls()
     {
-        int playerNum = GameManager.Instance.ChildCount.Count;
+        int playerNum = GameManager.Instance.PlayerNum;
         int maxPlayer = GameManager.Instance.MaxPlayer;
 
+        _spriteRenderer.GetComponent<TrailRenderer>().enabled = true;
         float growthfunction = (0.75f + 0.05f * Mathf.Pow((playerNum - 1), 1.35f));
         _generatingTime = growthfunction * Random.Range(6f, 10f);
         //if (playerNum<=3 && _generatingTime > 12)
@@ -119,13 +127,34 @@ public class PlayerMove : MonoBehaviour
             //{
             //    Instantiate(_refToRandomBall, this.transform.position, Quaternion.identity);
             //}
+
+            //if (playerNum < maxPlayer)
+            //{
+            //    _temp = Instantiate(_refToPlayer, this.transform.position, Quaternion.identity);
+            //    _gameManager.ChildCount.Add(_temp);//add players to the list
+
+            //    //add to list
+            //}
             if (playerNum < maxPlayer)
             {
-                _temp = Instantiate(_refToPlayer, this.transform.position, Quaternion.identity);
-                _gameManager.ChildCount.Add(_temp);//add players to the list
+                for (int i = 0; i < _gameManager.PlayerNum; i++)
+                {
+                    if (_gameManager.ChildCount[i].activeInHierarchy == false)
+                    {
+                        _gameManager.ChildCount[i].transform.position = this.transform.position;
+                        _gameManager.ChildCount[i].SetActive(true);
+                        _gameManager.Reused = true;
+                        break;
+                    }
+                }
 
-                //add to list
+                if (_gameManager.Reused == false)
+                {
+                    _temp = Instantiate(_refToPlayer, this.transform.position, Quaternion.identity);
+                    _gameManager.ChildCount.Add(_temp);
+                }
             }
+
         }
     }
 
@@ -196,7 +225,13 @@ public class PlayerMove : MonoBehaviour
             //gameObject.SetActive(false);
             //remove 1 from list
             //_gameManager.ChildCount.Remove(gameObject);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
+            _spriteRenderer.GetComponent<TrailRenderer>().enabled = false;
+            //if(_decreasingNum == true)
+            //{
+            //    _gameManager.PlayerNum--;
+            //    _decreasingNum = false;
+            //}
         }
     }
     private void OnDestroy()
